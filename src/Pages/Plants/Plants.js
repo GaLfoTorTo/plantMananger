@@ -5,12 +5,15 @@ import {
     View,
     Text,
     FlatList,
+    ActivityIndicator
 } from 'react-native';
 import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
 import Header from '../../Components/Header/Header';
 import estilo from './estilo';
 import api from '../../Api/api';
 import CardPlantas from '../../Components/CardPlantas/CardPlantas';
+import Load from '../../Components/Load';
+import colors from '../../Styles/colors';
 
 const Plants = ({navigation}) =>{
 
@@ -18,31 +21,11 @@ const Plants = ({navigation}) =>{
     const [planta, setPlanta] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [selectedAmbiente, setSelectedAmbiente] = useState('all')
+    const [loading, setLoading] = useState(true)
+    const [page, setPage] = useState(1)
+    const [more, setMore] = useState(false)
 
     var active = false;
-
-    useEffect(() => {
-        const ambientes = async () => {
-            const { data } = await api.get('plants_environments?_sort=title&_order=asc');
-            setAmbiente([
-                {
-                    key: 'all',
-                    title: 'Todos',
-                },
-                ...data
-            ]);
-        }
-        ambientes();
-    }, []);
-
-    useEffect(() => {
-        const plantas = async () => {
-            const { data } = await api.get('plants?_sort=name&_order=asc');
-            setPlanta(data);
-        }
-        plantas();
-    }, []);
-
     const selecionarAmbiente = (env) => {
 
         setSelectedAmbiente(env)
@@ -55,6 +38,52 @@ const Plants = ({navigation}) =>{
         setFiltered(filteredPlants)
     }
 
+    useEffect(() => {
+        const ambientes = async () => {
+            const { data } = await api
+                .get(`plants_environments?_sort=title&_order=asc`);
+            setAmbiente([
+                {
+                    key: 'all',
+                    title: 'Todos',
+                },
+                ...data
+            ]);
+        }
+        ambientes();
+    }, []);
+
+    const carregar = (distancia) => {
+        if(distancia < 1)
+            return;
+        setMore(true);
+        setPage(oldValue => oldValue + 1);
+        plantas();
+    }
+
+    const plantas = async () => {
+        const { data } = await api
+            .get(`plants?_sort=name&_order=asc&_page=${page}&_limite=8`);
+        if (!data)
+            return setLoading(true);
+        if (page > 1) {
+            setPlanta(oldValue => { ...oldValue, ...data})
+        setFiltered(oldValue => { ...oldValue, ...data})
+        }else {
+            setPlanta(data);
+        setFiltered(data);
+                    }
+        setLoading(false)
+        setMore(false)
+    }
+
+    useEffect(() => {
+        
+        plantas();
+    }, []);
+
+    if(loading)
+        return <Load />
     return (
         <SafeAreaView style={estilo.container}>
             <View style={estilo.content}>
@@ -91,6 +120,13 @@ const Plants = ({navigation}) =>{
                 <FlatList
                     data={filtered}
                     numColumns={2}
+                    onEndReachedThreshold={0.1}
+                    onEndReached={({distanceFromEnd})=> {carregar(distanceFromEnd)}}
+                    ListFooterComponent={
+                        carregar 
+                        ?<ActivityIndicator color={colors.green}/>
+                        :<></>
+                    }
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item, index }) => {
                         return (
