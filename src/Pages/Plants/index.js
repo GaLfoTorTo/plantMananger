@@ -1,0 +1,1 @@
+export {default as Plants} from './Plants';
