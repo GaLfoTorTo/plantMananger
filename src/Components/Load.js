@@ -23,9 +23,11 @@ const estilo = StyleSheet.create({
         justifyContent: 'center'
     },
     load:{
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: 'transparent',
-        width: '20%',
-        height: '20%'
+        width: '70%',
+        height: '70%'
     }
 })
 

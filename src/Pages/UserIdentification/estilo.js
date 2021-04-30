@@ -35,6 +35,17 @@ const estilo = StyleSheet.create({
     },
     focusedInput:{
         borderColor: colors.green
+    },
+    modal: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '80%',
+        height: '60%',
+        backgroundColor: 'rgb(255, 245, 245)'
+    },
+    textModal: {
+        color: 'white'
     }
 
 });

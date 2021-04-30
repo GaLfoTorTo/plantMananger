@@ -1,13 +1,12 @@
 import  React ,{ useEffect, useState } from 'react';
 import {
     SafeAreaView,
-    ScrollView,
     View,
     Text,
     FlatList,
     ActivityIndicator
 } from 'react-native';
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+import { RectButton } from 'react-native-gesture-handler';
 import Header from '../../Components/Header/Header';
 import estilo from './estilo';
 import api from '../../Api/api';
@@ -32,8 +31,8 @@ const Plants = ({navigation}) =>{
         if (env == 'all')
             return setFiltered(planta);
 
-        const filteredPlants = planta.filter(planta =>
-            planta.environments.includes(env)
+        const filteredPlants = planta.filter(plant =>
+            plant.environments.includes(env)
         )
         setFiltered(filteredPlants)
     }
@@ -67,18 +66,17 @@ const Plants = ({navigation}) =>{
         if (!data)
             return setLoading(true);
         if (page > 1) {
-            setPlanta(oldValue => { ...oldValue, ...data})
-        setFiltered(oldValue => { ...oldValue, ...data})
+            setPlanta(oldValue => [ ...oldValue, ...data])
+            setFiltered(oldValue => [ ...oldValue, ...data])
         }else {
             setPlanta(data);
-        setFiltered(data);
-                    }
+            setFiltered(data);
+        }
         setLoading(false)
         setMore(false)
     }
 
-    useEffect(() => {
-        
+    useEffect(() =>{
         plantas();
     }, []);
 

@@ -5,7 +5,8 @@ import {
     Text,
     TextInput,
     KeyboardAvoidingView,
-    Platform
+    Platform,
+    Modal,
 } from 'react-native';
 import Botao from '../../Components/Botao';
 import estilo from './estilo';
@@ -15,6 +16,8 @@ const UserIdentification = ({navigation}) => {
     const [isFocused, setIsFocused] = useState(false);
     const [isFilled, setIsFilled] = useState(false);
     const [name, setName] = useState();
+    const [open, setOpen] = useState(false);
+    
     const handleBlur = () =>{
         setIsFocused(false)
         setIsFilled(!!name);
@@ -26,6 +29,7 @@ const UserIdentification = ({navigation}) => {
         setIsFilled(!!value);
         setName(value)
     }
+    
     return(
         <SafeAreaView style={estilo.container}>
             <KeyboardAvoidingView
@@ -43,10 +47,18 @@ const UserIdentification = ({navigation}) => {
                         onChangeText={handelChange}
                     ></TextInput>
                 </View>
+                {open == true ??
+                    <Modal visible={open}>
+                        <View style={estilo.modal}>
+                            <Text style={estilo.textModal}>teste</Text>
+                        </View>
+                    </Modal>
+                }
                 <Botao 
                     navigation={navigation}
                     title='Confirmar'
                     routeName='Confirmation'
+                    nome={name}
                 />
             </KeyboardAvoidingView>
         </SafeAreaView>
