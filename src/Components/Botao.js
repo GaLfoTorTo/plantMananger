@@ -7,19 +7,21 @@ import {
 import colors from '../Styles/colors';
 import fonts from '../Styles/fonts'
 
-const Botao = ({navigation, title, routeName, nome})=>{
-    
-    const navegar = (nome) => {
-        if (!nome){
-            var boolean = true
-            return boolean;
+const Botao = ({navigation, title, routeName, open, info})=>{
+
+    const infoPage = info;
+
+    const navegar = () => {
+        if (open() == true){
+            return;
         }
-        navigation.navigate(routeName)
+        return navigation.navigate(routeName, {infoPage});
     }
+      
     return(
         <TouchableOpacity 
             style={estilo.botao}
-            onPress={() => navegar(nome)}
+            onPress={() => navegar()}
         >
             <Text style={estilo.textoBotao}>{title}</Text>
         </TouchableOpacity>

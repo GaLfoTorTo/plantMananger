@@ -39,13 +39,50 @@ const estilo = StyleSheet.create({
     modal: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '80%',
-        height: '60%',
-        backgroundColor: 'rgb(255, 245, 245)'
+        justifyContent: 'space-around',
+        backgroundColor: 'transparent',
+    },
+    modalContent: {
+        backgroundColor: 'rgb(255, 30 ,30)',
+        width: '82%',
+        height: '50%',
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: 'rgb(200, 70, 70)',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+
+    },
+    cardTextModal:{
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        height: '80%',
+        paddingHorizontal: 10
+    },
+    emojiModal:{
+        fontSize: 50,
+        textAlign: 'center',
+
     },
     textModal: {
-        color: 'white'
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 20
+    },
+    div:{
+        width:'100%',
+        height: 1,
+        backgroundColor: 'white',
+    },
+    botaoIcon: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '12%',
+        borderRadius: 20
+    },
+    icon:{
+        color: 'white',
     }
 
 });

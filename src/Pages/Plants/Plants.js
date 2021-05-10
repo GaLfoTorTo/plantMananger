@@ -79,7 +79,7 @@ const Plants = ({navigation}) =>{
     useEffect(() =>{
         plantas();
     }, []);
-
+    
     if(loading)
         return <Load />
     return (
@@ -126,9 +126,11 @@ const Plants = ({navigation}) =>{
                         :<></>
                     }
                     showsVerticalScrollIndicator={false}
+                    keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => {
                         return (
                             <CardPlantas
+                                navigation={navigation}
                                 data={item}
                             />
                         );
