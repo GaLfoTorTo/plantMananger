@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFonts, Jost_400Regular, Jost_600SemiBold } from '@expo-google-fonts/jost';
-import Routes from './src/Routes/ ';
+import AppLoading from 'expo-app-loading'
+import Routes from './src/Routes/';
 
 
 export default function App() {

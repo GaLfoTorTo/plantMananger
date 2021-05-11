@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
-import StackRoutes from './src/Routes/StackRoutes';
+import StackRoutes from './StackRoutes';
 
 const Routes = () =>{
     return(

@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Welcome from './src/Pages/Welcome/Welcome';
-import UserIdentification from './src/Pages/UserIdentification/UserIdentification';
-import Confirmation from './src/Pages/Confirmation/Confirmation';
-import MyPlant from './src/Pages/MyPlant/MyPlant'
-import TabRoutes from './src/Routes/TabRoutes';
+import Welcome from '../Pages/Welcome/Welcome';
+import UserIdentification from '../Pages/UserIdentification/UserIdentification';
+import Confirmation from '../Pages/Confirmation/Confirmation';
+import MyPlant from '../Pages/MyPlant/MyPlant'
+import TabRoutes from './TabRoutes';
 
 const Stack = createStackNavigator();
 
